@@ -6,13 +6,13 @@ import userEvent from "@testing-library/user-event";
 beforeEach(() => {
   Object.defineProperty(window.navigator, "clipboard", {
     value: {
-      item: "",
-      readText() {
-        if (typeof this.item !== "string") return Promise.resolve("");
-        return Promise.resolve(this.item);
+      clipboardItem: undefined,
+      readText(this: { clipboardItem: ClipboardItemDataType }) {
+        if (typeof this.clipboardItem !== "string") return Promise.resolve("");
+        return Promise.resolve(this.clipboardItem);
       },
-      writeText(text: string) {
-        this.item = text;
+      writeText(this: { clipboardItem: ClipboardItemDataType }, data: string) {
+        this.clipboardItem = data;
         return Promise.resolve();
       },
     },
