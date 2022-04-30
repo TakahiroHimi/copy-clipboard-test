@@ -8,7 +8,6 @@ beforeEach(() => {
     value: {
       clipboardItem: undefined,
       readText(this: { clipboardItem: ClipboardItemDataType }) {
-        if (typeof this.clipboardItem !== "string") return Promise.resolve("");
         return Promise.resolve(this.clipboardItem);
       },
       writeText(this: { clipboardItem: ClipboardItemDataType }, data: string) {
